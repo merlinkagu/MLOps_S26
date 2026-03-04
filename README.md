@@ -1,0 +1,2 @@
+# MLOps_S26
+This is the repo for the course MLOps Fundamentals - LTAT.02.038
