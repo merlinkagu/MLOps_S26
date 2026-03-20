@@ -1,0 +1,6 @@
+data/*
+!data/*.dvc
+models/*
+!models/*.dvc
+*.parquet
+*.pkl
