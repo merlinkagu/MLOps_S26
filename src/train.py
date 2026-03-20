@@ -6,8 +6,10 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
-# Load data
-data = pd.read_parquet('data/green_tripdata_2021-01.parquet')
+# Loading data jan + feb
+df_jan = pd.read_parquet('data/green_tripdata_2021-01.parquet')
+df_feb = pd.read_parquet('data/green_tripdata_2021-02.parquet')
+data = pd.concat([df_jan, df_feb], ignore_index=True)
 
 # Basic filtering
 data = data.drop(columns=['ehail_fee'])
@@ -51,7 +53,7 @@ reg_model.fit(X_train, y_train)
 
 # Evaluation
 y_pred = reg_model.predict(X_test)
-print("V1 Training Results (Jan 2021):")
+print("V3 Training Results (Jan 2021 + Feb 2021):")
 print(f"MAE:  {mean_absolute_error(y_test, y_pred):.4f}")
 print(f"RMSE: {np.sqrt(mean_squared_error(y_test, y_pred)):.4f}")
 print(f"R2:   {r2_score(y_test, y_pred):.4f}")
