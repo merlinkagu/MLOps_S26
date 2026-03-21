@@ -1,0 +1,30 @@
+stages:
+  train:
+    cmd: python src/train.py
+    deps:
+    - src/train.py
+    - data/green_tripdata_2021-01.parquet
+    - data/green_tripdata_2021-02.parquet
+    params:
+    - train
+    - data
+    outs:
+    - models/random_forest_regression.pkl
+    metrics:
+    - dvclive/metrics.json:
+        cache: false
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - src/evaluate.py
+    - models/random_forest_regression.pkl
+    - data/green_tripdata_2021-01.parquet
+    - data/green_tripdata_2021-02.parquet
+params:
+- dvclive/params.yaml
+metrics:
+- dvclive/metrics.json
+plots:
+- dvclive/plots/metrics:
+    x: step

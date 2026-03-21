@@ -1,0 +1,55 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/green_tripdata_2021-01.parquet
+      hash: md5
+      md5: 58f7622b863151fc9f4d51eff826db50
+      size: 1333519
+    - path: data/green_tripdata_2021-02.parquet
+      hash: md5
+      md5: 37305f2db8bd9ae2553212bba9e2b0b5
+      size: 1145679
+    - path: src/train.py
+      hash: md5
+      md5: 5699839f926431c4d6c3821cee03096f
+      size: 3234
+    params:
+      params.yaml:
+        data:
+          train_path: data/green_tripdata_2021-01.parquet
+          test_path: data/green_tripdata_2021-02.parquet
+          outlier_distance: 150
+        train:
+          test_size: 0.2
+          random_state: 42
+          n_estimators: 10
+    outs:
+    - path: dvclive/metrics.json
+      hash: md5
+      md5: 341d95ac72c40d7ea6249d00b8beecc5
+      size: 99
+    - path: models/random_forest_regression.pkl
+      hash: md5
+      md5: 06dd1fe203e6c6d389104aa0444b7dea
+      size: 56310177
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/green_tripdata_2021-01.parquet
+      hash: md5
+      md5: 58f7622b863151fc9f4d51eff826db50
+      size: 1333519
+    - path: data/green_tripdata_2021-02.parquet
+      hash: md5
+      md5: 37305f2db8bd9ae2553212bba9e2b0b5
+      size: 1145679
+    - path: models/random_forest_regression.pkl
+      hash: md5
+      md5: 06dd1fe203e6c6d389104aa0444b7dea
+      size: 56310177
+    - path: src/evaluate.py
+      hash: md5
+      md5: 49aede6f92c92c3c4634780dac108b78
+      size: 1908
