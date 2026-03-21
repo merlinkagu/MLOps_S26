@@ -13,8 +13,8 @@ stages:
       size: 1145679
     - path: src/train.py
       hash: md5
-      md5: 5699839f926431c4d6c3821cee03096f
-      size: 3234
+      md5: de7e870e22fc15b8d17311c0f4912e47
+      size: 3593
     params:
       params.yaml:
         data:
@@ -24,16 +24,16 @@ stages:
         train:
           test_size: 0.2
           random_state: 42
-          n_estimators: 10
+          n_estimators: 100
     outs:
     - path: dvclive/metrics.json
       hash: md5
-      md5: 341d95ac72c40d7ea6249d00b8beecc5
-      size: 99
+      md5: 7d22017d8a22cdd8d577bef12a5da56c
+      size: 100
     - path: models/random_forest_regression.pkl
       hash: md5
-      md5: 06dd1fe203e6c6d389104aa0444b7dea
-      size: 56310177
+      md5: d15534fdc2b4b76351537199a79ee4c6
+      size: 563022993
   evaluate:
     cmd: python src/evaluate.py
     deps:
@@ -47,8 +47,8 @@ stages:
       size: 1145679
     - path: models/random_forest_regression.pkl
       hash: md5
-      md5: 06dd1fe203e6c6d389104aa0444b7dea
-      size: 56310177
+      md5: d15534fdc2b4b76351537199a79ee4c6
+      size: 563022993
     - path: src/evaluate.py
       hash: md5
       md5: 49aede6f92c92c3c4634780dac108b78

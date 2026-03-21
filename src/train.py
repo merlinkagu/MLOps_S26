@@ -7,16 +7,27 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
 def load_params(params_path: str) -> dict:
     try:
         with open(params_path, 'r') as file:
             params = yaml.safe_load(file)
+        logger.debug('Parameters retrieved from %s', params_path)
         return params
     except FileNotFoundError:
+        logger.error('File not found: %s', params_path)
         raise
     except yaml.YAMLError as e:
+        logger.error('YAML error: %s', e)
         raise
+    except Exception as e:
+        logger.error('Unexpected error: %s', e)
+        raise
+
 
 def main():
     params = load_params('params.yaml')
