@@ -1,4 +1,7 @@
 [core]
-    remote = storage
+    remote = dvstore
 ['remote "storage"']
     url = gdrive://11M9rcE61h8rwe-W2y6QXk84BURgPt9LZ
+['remote "dvstore"']
+    url = s3://mlops-s26-bucket
+    endpointurl = https://s3.us-east-005.backblazeb2.com
